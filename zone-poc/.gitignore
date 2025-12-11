@@ -1,0 +1,30 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Data (RocksDB, benchmarks)
+data/
+*.db
+
+# Output files (regenerated)
+*_results.json
+*_results.md
+
+# Logs
+*.log

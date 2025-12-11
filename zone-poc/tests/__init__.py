@@ -1,0 +1,3 @@
+"""
+Glogos Attester Tests
+"""

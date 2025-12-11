@@ -21,7 +21,7 @@ proposal/
 ├── genesis/
 │   ├── witness.py         # Mainnet launch ceremony
 │   └── test_vectors.py
-└── zone-reference/        # Reference implementation
+└── zone-poc/        # Reference implementation
 ```
 
 ## GLSR (Glogos State Root)

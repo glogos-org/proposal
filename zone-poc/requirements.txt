@@ -1,0 +1,22 @@
+# Glogos Reference Zone Dependencies
+# For Proposal v1.0-rc.0
+
+# Core
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+
+# Cryptography
+cryptography>=41.0.0
+
+# HTTP client (OPTIONAL - only for cross-zone API calls)
+# Core attestation/merkle verification works OFFLINE with no internet
+httpx>=0.25.0
+
+# Storage - RocksDB (optional, for high-performance persistent storage)
+# rocksdict is a pure Python wheel, easy to install
+rocksdict>=0.3.0
+
+# Development & Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0

@@ -1,0 +1,89 @@
+# Glogos High-Throughput Zone - Docker Compose
+# Horizontal scaling with Nginx load balancer
+
+networks:
+  glogos_zone:
+    driver: bridge
+
+volumes:
+  zone1_data:
+  zone2_data:
+  zone3_data:
+
+services:
+  # ============================================================================
+  # Nginx Load Balancer
+  # ============================================================================
+  
+  nginx:
+    image: nginx:alpine
+    container_name: glogos_lb
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - zone1
+      - zone2
+      - zone3
+    networks:
+      - glogos_zone
+    restart: unless-stopped
+
+  # ============================================================================
+  # Zone Replicas
+  # ============================================================================
+  
+  zone1:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: glogos_zone1
+    environment:
+      - ZONE_NAME=Zone-1
+      - ROCKSDB_PATH=/data/rocksdb
+      - BITCOIN_NETWORK=testnet3
+      - BITCOIN_SIMULATION=true
+      - ANCHOR_MAX_ATTESTATIONS=100
+      - PORT=8000
+    volumes:
+      - zone1_data:/data
+    networks:
+      - glogos_zone
+    restart: unless-stopped
+
+  zone2:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: glogos_zone2
+    environment:
+      - ZONE_NAME=Zone-2
+      - ROCKSDB_PATH=/data/rocksdb
+      - BITCOIN_NETWORK=testnet3
+      - BITCOIN_SIMULATION=true
+      - ANCHOR_MAX_ATTESTATIONS=100
+      - PORT=8000
+    volumes:
+      - zone2_data:/data
+    networks:
+      - glogos_zone
+    restart: unless-stopped
+
+  zone3:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: glogos_zone3
+    environment:
+      - ZONE_NAME=Zone-3
+      - ROCKSDB_PATH=/data/rocksdb
+      - BITCOIN_NETWORK=testnet3
+      - BITCOIN_SIMULATION=true
+      - ANCHOR_MAX_ATTESTATIONS=100
+      - PORT=8000
+    volumes:
+      - zone3_data:/data
+    networks:
+      - glogos_zone
+    restart: unless-stopped
