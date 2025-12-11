@@ -20,6 +20,7 @@ env/
 
 # Data (RocksDB, benchmarks)
 data/
+data_rocksdb/
 *.db
 
 # Output files (regenerated)
@@ -28,3 +29,7 @@ data/
 
 # Logs
 *.log
+
+# Rust
+target/
+Cargo.lock
